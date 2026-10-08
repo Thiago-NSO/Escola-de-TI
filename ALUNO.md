@@ -2,9 +2,9 @@
 
 # ALUNO
 
-Nome: Thiago Nunes
+Nome: Thiago Nunes de Souza
 
-RA: >>> PREENCHER <<<
+RA: 23000383-2
 
 Conta GitHub: @Thiago-NSO
 
