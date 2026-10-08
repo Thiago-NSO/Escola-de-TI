@@ -3,19 +3,19 @@
 Diretrizes de arquitetura, dependências, armazenamento e execução para geração autônoma pelo Kimi 2.8.
 
 ## 1. Stack Tecnológica e Justificativas
-- **Linguagem**: Python 3.12 (simplicidade sintática e geração determinística sem ambiguidades de tipos).
-- **Framework Web**: FastAPI com Pydantic v2 (validação estrita de contratos JSON, regex de placas e serialização de datas).
+- **Linguagem**: Python 3.12 (sintaxe direta, ampla familiaridade do modelo gerador e determinismo de execução).
+- **Framework Web**: FastAPI com Pydantic v2 (validação estrita de contratos via schemas, tipagem estática e serialização de ISO-8601).
 - **Servidor ASGI**: Uvicorn escutando na porta 8003.
-- **Banco de Dados**: SQLite em memória ou arquivo único (elimina dependências externas de infraestrutura e viabiliza testes isolados).
-- **Testes**: Pytest com Starlette `TestClient` para validação rápida e síncrona dos endpoints HTTP.
+- **Banco de Dados**: SQLite com persistência em arquivo único local ou memória (elimina dependências de rede/serviços externos e facilita testes isolados).
+- **Testes**: Pytest com Starlette `TestClient` para execução síncrona, veloz e sem necessidade de subprocessos.
 
 ## 2. Arquitetura Modular Proposta
 A geração do código deve seguir separação explícita de responsabilidades:
-- `main.py`: Inicialização da aplicação FastAPI e configuração dos middlewares.
-- `schemas.py`: Modelos Pydantic de entrada, saída e respostas de erro.
-- `domain.py`: Funções puras de cálculo de tarifas, arredondamento de frações (15 min / 125 centavos), teto diário (8000) e tolerância (15 min).
-- `repository.py`: Acesso e persistência dos bilhetes em SQLite.
-- `routers.py`: Definição das rotas (UC1 a UC8) e conversão de exceções em códigos HTTP.
+- `main.py`: Inicialização da aplicação FastAPI e configuração dos routers.
+- `schemas.py`: Modelos Pydantic para validação de entrada, saída e formato canônico de erros.
+- `domain.py`: Funções puras de cálculo de tarifas, arredondamento para cima em frações de 15 min, teto de 8000 centavos, tolerância de 15 min e média com arredondamento 0.5 para cima.
+- `repository.py`: Camada de acesso a dados e consultas SQLite.
+- `routers.py`: Implementação dos endpoints (UC1 a UC8) e conversão de erros de domínio em códigos HTTP.
 
 ## 3. Gestão Temporal e Determinismo
 - **Tratamento de Fuso Horário**: Decisão de utilizar exclusivamente `datetime.timezone(datetime.timedelta(hours=-3))` nativo da biblioteca padrão `datetime` do Python. Isso elimina a dependência do pacote `tzdata` em containers Docker minimalistas (`python:3.12-slim`) e assegura formatação estrita em ISO-8601 com offset `-03:00`.
