@@ -6,7 +6,7 @@ Guia sequencial de tarefas para o modelo Kimi 2.8 executar a geração e verific
 1. Ler e respeitar integralmente as restrições de `constitution.md` e o contrato de `spec.md`.
 2. Executar as tarefas em ordem estrita de dependência.
 3. Não truncar código ou omitir implementações essenciais.
-4. Manter mensagens e logs sucintos para não consumir desnecessariamente a janela de contexto.
+4. Manter mensagens e logs sucintos para não consumir desnecessariamente a janela de contexto de 256k tokens.
 
 ## Tarefas Decompostas
 
@@ -16,8 +16,8 @@ Guia sequencial de tarefas para o modelo Kimi 2.8 executar a geração e verific
 
 ### Tarefa 2: Módulo de Domínio e Regras de Negócio
 - **Ações**: Implementar as regras puras de cálculo de frações de 15 minutos, tarifa proporcional (125 centavos), teto diário de 8000 centavos, regra de tolerância de 15 minutos e arredondamento aritmético de tempo médio.
-- **Artefato**: Módulo de domínio com funções desacopladas de frameworks web.
-- **Critério de Conclusão**: Testes unitários das funções matemáticas passando para todos os casos de borda descritos em `tests.md`.
+- **Artefato**: Módulo de domínio com funções puras desacopladas de frameworks web.
+- **Critério de Conclusão**: Funções matemáticas cobrindo com exatidão todos os casos de borda descritos em `tests.md` (TC-01 a TC-08, TC-19 e TC-20).
 
 ### Tarefa 3: Esquemas Pydantic e Persistência
 - **Ações**: Definir modelos Pydantic com validação de placa (7 caracteres maiúsculos) e datas ISO-8601 (-03:00). Criar repositório SQLite para persistência dos bilhetes.
@@ -30,5 +30,5 @@ Guia sequencial de tarefas para o modelo Kimi 2.8 executar a geração e verific
 - **Critério de Conclusão**: Todos os endpoints respondendo exatamente aos formatos canônicos definidos em `spec.md`.
 
 ### Tarefa 5: Suíte de Testes, Containerfile e Documentação
-- **Ações**: Implementar a suíte completa de testes com Pytest cobrindo os IDs de TC-01 a TC-17. Criar `Dockerfile` expondo a porta 8003 e `README.md` com instruções de execução.
-- **Critério de Conclusão**: Suite de testes executando com 100% de sucesso e container pronto para inicialização na porta 8003.
+- **Ações**: Implementar a suíte completa de testes com Pytest cobrindo os IDs de TC-01 a TC-22. Criar `Dockerfile` expondo a porta 8003 e `README.md` com instruções de execução.
+- **Critério de Conclusão**: Suíte de testes executando com 100% de sucesso e container pronto para inicialização na porta 8003.
