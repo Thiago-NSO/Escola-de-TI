@@ -18,8 +18,9 @@ A geração do código deve seguir separação explícita de responsabilidades:
 - `routers.py`: Definição das rotas (UC1 a UC8) e conversão de exceções em códigos HTTP.
 
 ## 3. Gestão Temporal e Determinismo
-- Todas as operações utilizam objetos de data/hora associados ao timezone `-03:00` (`zoneinfo.ZoneInfo("America/Sao_Paulo")` ou `timezone(timedelta(hours=-3))`).
-- O suporte ao campo `entrada` no `POST /bilhetes` e controle do relógio no encerramento garantem que os testes determinísticos validem cálculos de horas sem necessidade de espera real (`sleep`).
+- **Tratamento de Fuso Horário**: Decisão de utilizar exclusivamente `datetime.timezone(datetime.timedelta(hours=-3))` nativo da biblioteca padrão `datetime` do Python. Isso elimina a dependência do pacote `tzdata` em containers Docker minimalistas (`python:3.12-slim`) e assegura formatação estrita em ISO-8601 com offset `-03:00`.
+- **Determinismo nos Testes**: O endpoint `POST /bilhetes` aceita o campo opcional `entrada` para permitir que cenários de teste simulem o passado sem depender de esperas reais (`time.sleep`) ou de mocks externos de relógio.
+- **Data do Relatório**: O filtro `?data=AAAA-MM-DD` do relatório diário considera a data civil local (`-03:00`) registrada no carimbo de `saida` dos bilhetes encerrados.
 
 ## 4. Representação Monetária em Centavos
 - Valores monetários são manipulados exclusivamente como inteiros representando centavos (`int`), prevenindo problemas clássicos de ponto flutuante binário (IEEE 754) e garantindo conformidade com a rubrica.
