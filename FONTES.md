@@ -14,13 +14,7 @@
 > texto corrido — inclusive o exemplo logo abaixo — **não são contados**
 > como fonte declarada.
 
-| # | URL | O que foi consultado | Onde aparece no entregável |
-| --- | --- | --- | --- |
-| — | | | |
-
-*(Ex.: `https://docs.oracle.com/...` → sintaxe de `Optional` → `plan.md` na
-seção de decisões. Esse link é ILUSTRATIVO — fora de linha numerada não
-conta. Se nenhum site foi consultado, escreva: **"Nenhum site consultado."**)*
+Nenhum site consultado.
 
 ## 2. Uso de IA — **somente como consulta**
 
@@ -38,9 +32,7 @@ conta. Se nenhum site foi consultado, escreva: **"Nenhum site consultado."**)*
 
 | # | Link público da conversa | Onde o conteúdo foi usado |
 | --- | --- | --- |
-| — | | |
-
-*(Se nenhuma IA foi utilizada, escreva: **"Nenhuma IA utilizada."**)*
+| 1 | https://share.gemini.google/3pXfd69FW997 | Elaboração dos arquivos spec.md, plan.md, tests.md e tasks.md |
 
 ## 3. Compromisso
 
@@ -48,7 +40,7 @@ Declaro que todo o conteúdo deste repositório que não é de minha autoria dir
 está declarado acima, e que consigo explicar qualquer trecho entregue — tenha
 ele vindo da minha cabeça, de um site ou de uma IA consultada.
 
-**Nome / RA:**
+**Nome / RA:** Gabriel Andrade Garcia / 23271855-2
 
 [^transparencia]: Este arquivo é, ele mesmo, um exemplo de markdown bem
     usado: *alert* para a regra crítica, tabelas para os registros e *footnote*
